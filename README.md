@@ -22,3 +22,7 @@ D11|MOSI
 D13|SCK
 D10|NSS
 D9|RST
+
+# Executing
+* Upload the code [a relative link](LoRaReceiver.ino) to the ESP32 + LoRa device.
+* Upload the code [a relative link](MPU6050LoRaSender.ino) to the Arduino Nano.
