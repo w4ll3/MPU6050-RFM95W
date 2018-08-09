@@ -6,7 +6,7 @@ The following connections need to be made:
 
 NANO  | MPU6050
 ------|------
-<center>D3</center>|INT
+D3|INT
 A4|SDA
 A5|SCL
 +5V|VIN
