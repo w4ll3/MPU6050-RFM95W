@@ -361,7 +361,6 @@ void loop() {
         #endif
     
         #ifdef OUTPUT_TEAPOT
-//            Serial.println("TEAPLOT");
             // display quaternion values in InvenSense Teapot demo format:
             teapotPacket[2] = fifoBuffer[0];
             teapotPacket[3] = fifoBuffer[1];
@@ -372,20 +371,6 @@ void loop() {
             teapotPacket[8] = fifoBuffer[12];
             teapotPacket[9] = fifoBuffer[13];
             LoRa.beginPacket();
-//            LoRa.print(teapotPacket[0]);
-//            LoRa.print(teapotPacket[1]);
-//            LoRa.print(teapotPacket[2]);
-//            LoRa.print(teapotPacket[3]);
-//            LoRa.print(teapotPacket[4]);
-//            LoRa.print(teapotPacket[5]);
-//            LoRa.print(teapotPacket[6]);
-//            LoRa.print(teapotPacket[7]);
-//            LoRa.print(teapotPacket[8]);
-//            LoRa.print(teapotPacket[9]);
-//            LoRa.print(teapotPacket[10]);
-//            LoRa.print(teapotPacket[11]);
-//            LoRa.print(teapotPacket[12]);
-//            LoRa.print(teapotPacket[13]);
               LoRa.print(teapotPacket, 14);
             LoRa.endPacket();
             Serial.write(teapotPacket, 14);
