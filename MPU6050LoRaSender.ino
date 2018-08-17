@@ -20,17 +20,14 @@
 /* ============================================
 I2Cdev device library code is placed under the MIT license
 Copyright (c) 2012 Jeff Rowberg
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
-
 The above copyright notice and this permission notice shall be included in
 all copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -75,7 +72,6 @@ MPU6050 mpu;
    The solution requires a modification to the Arduino USBAPI.h file, which
    is fortunately simple, but annoying. This will be fixed in the next IDE
    release. For more info, see these links:
-
    http://arduino.cc/forum/index.php/topic,109987.0.html
    http://code.google.com/p/arduino/issues/detail?id=958
  * ========================================================================= */
@@ -181,6 +177,8 @@ void setup() {
       while (1);
     }
 
+    LoRa.setSpreadingFactor(7);
+
     // NOTE: 8MHz or slower host processors, like the Teensy @ 3.3V or Arduino
     // Pro Mini running at 3.3V, cannot handle this baud rate reliably due to
     // the baud timing being too misaligned with processor ticks. You must use
@@ -196,11 +194,6 @@ void setup() {
     Serial.println(F("Testing device connections..."));
     Serial.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
 
-    // wait for ready
-    Serial.println(F("\nSend any character to begin DMP programming and demo: "));
-    while (Serial.available() && Serial.read()); // empty buffer
-    while (!Serial.available());                 // wait for data
-    while (Serial.available() && Serial.read()); // empty buffer again
 
     // load and configure the DMP
     Serial.println(F("Initializing DMP..."));
@@ -371,9 +364,8 @@ void loop() {
             teapotPacket[8] = fifoBuffer[12];
             teapotPacket[9] = fifoBuffer[13];
             LoRa.beginPacket();
-              LoRa.print(teapotPacket, 14);
+              LoRa.write(teapotPacket, 14);
             LoRa.endPacket();
-            Serial.write(teapotPacket, 14);
             teapotPacket[11]++; // packetCount, loops at 0xFF on purpose
         #endif
 
